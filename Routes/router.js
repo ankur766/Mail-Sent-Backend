@@ -6,6 +6,8 @@ const nodemailer = require('nodemailer');
 router.post('/api/sendemail', (req, res) => {
     try {
         const email = req.body.email;
+        const name = req.body.name;
+        console.log('name:', name);
 
         if (!email) {
             return res.status(400).json({ status: 400, error: 'Email address is required' });
@@ -20,6 +22,7 @@ router.post('/api/sendemail', (req, res) => {
             
         });
         console.log('email:', email);
+        console.log('name:', name);
         //receive mail from user
         const mailOptions = {
 
@@ -28,7 +31,7 @@ router.post('/api/sendemail', (req, res) => {
             subject: 'Thank You for Visiting My Profile',
             html: `
             <h1>🌟 Thank You for Visiting My Portfolio! 🌟</h1>
-<p>Dear Esteemed Visitor,</p>
+            <p>Dear ${name},</p>
 <p>It brings me immense joy to extend my heartfelt gratitude to you for taking the time to explore my portfolio. 🚀 Your visit is more than just a click; it's a moment of connection and appreciation.</p>
 
 <p>Your interest in my work means the world to me! 🌍 I've poured my passion, dedication, and creativity into every project, and having you explore it is a truly rewarding experience. 🎨</p>
